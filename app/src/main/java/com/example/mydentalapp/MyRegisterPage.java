@@ -1,16 +1,25 @@
 package com.example.mydentalapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mydentalapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,24 +30,30 @@ import org.joda.time.Days;
 
 public class MyRegisterPage extends AppCompatActivity {
 
-    EditText username, password, confirmpassword, START_WEEK;
-    Button register, login;
-    MyDBHelp DB;
+    private FirebaseAuth mAuth;
+    private TextView banner;
+    private EditText username, password, confirmpassword, emailx, START_WEEK;
+    private Button register, login;
+    private ProgressBar progressBar;
+
     int code;//FOR THE EMAIL VERIFICATION PART
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_register_page);
+
+        banner = (TextView)findViewById(R.id.banner);
+        emailx = (EditText)findViewById(R.id.email);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         confirmpassword = (EditText)findViewById(R.id.confirmpassword);
+        START_WEEK = (EditText)findViewById(R.id.st_week);
         register = (Button)findViewById(R.id.btnregister);
         login = (Button)findViewById(R.id.btnlogin);
-        DB = new MyDBHelp(this);
-        START_WEEK = (EditText)findViewById(R.id.st_week);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        mAuth = FirebaseAuth.getInstance();
+
 
         //
         //
@@ -80,44 +95,62 @@ public class MyRegisterPage extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                String confpass = confirmpassword.getText().toString();
-                String tempStr = START_WEEK.getText().toString();
+                String emx = emailx.getText().toString().trim();
+                String user = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+                String confpass = confirmpassword.getText().toString().trim();
+                String tempStr = START_WEEK.getText().toString().trim();
                 int START_WEEK_PREGNANCY = Integer.parseInt(tempStr);
 
                 //check if user exists or not
-                if(user.equals("")||pass.equals("")||confpass.equals(""))
+                if(emx.equals("")||user.equals("")||pass.equals("")||confpass.equals("")||tempStr.equals(""))
                     Toast.makeText(MyRegisterPage.this, "Please enter values for all field", Toast.LENGTH_SHORT).show();
                 else{
-                    //else check if user exists or not
+                    // Check if user entered a real valid email address
+                    if(!Patterns.EMAIL_ADDRESS.matcher(emx).matches()){
+                        emailx.setError("Please provide valid email address");
+                        emailx.requestFocus();
+                        return;
+                    }
+
+                    // Check if password is at least 6 characters long
+                    if(pass.length() < 6){
+                        password.setError("Password should be minimum 6 characters");
+                        password.requestFocus();
+                        return;
+                    }
+
+                    //check if user exists or not
                     if(pass.equals(confpass)){
-                        Boolean checkuser = DB.checkUsername(user);
-                        //if user does not exist-> insert
-                        if(checkuser==false){
-                            Boolean insert = DB.insertData(user, pass);
-                            //if data written to database show toast message
-                            if(insert==true){
-                                //
-                                //email verification
-                                //
+                        progressBar.setVisibility(View.VISIBLE);
+                        mAuth.createUserWithEmailAndPassword(emx, pass)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
 
-                                //
-                                //move calculation to home page and use start date as parameter?
-                                //
-
-//                                Toast.makeText(MyRegisterPage.this, START_WEEK_PREGNANCY, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(MyRegisterPage.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), MyLoginActivity.class);
-                                startActivity(i);
-                            }else{
-                                Toast.makeText(MyRegisterPage.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            //else when checkuser true
-                            Toast.makeText(MyRegisterPage.this, "User already exists, please login", Toast.LENGTH_SHORT).show();
-                        }
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if(task.isSuccessful()){
+                                            UserClass u = new UserClass(emx, user, START_WEEK_PREGNANCY);
+                                            FirebaseDatabase.getInstance("https://dentalhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
+                                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                    .setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        progressBar.setVisibility(View.GONE);
+                                                        Toast.makeText(MyRegisterPage.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(getApplicationContext(), MyLoginActivity.class);
+                                                        startActivity(i);
+                                                    }else{
+                                                        progressBar.setVisibility(View.GONE);
+                                                        Toast.makeText(MyRegisterPage.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                        }else{
+                                            Toast.makeText(MyRegisterPage.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }else{
                         Toast.makeText(MyRegisterPage.this, "Password does not match", Toast.LENGTH_SHORT).show();
                     }
@@ -133,14 +166,6 @@ public class MyRegisterPage extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
     }
-
-
-
 
 }

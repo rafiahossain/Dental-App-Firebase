@@ -31,15 +31,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnlogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textColor="#FF0095"
-        app:backgroundTint="#00F9C2E2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:scaleType="centerInside"
+        android:background="@drawable/custombutton1round"
+        android:padding="6dp"
+        android:tint="@color/mybuttonpink"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
+
+    <ImageButton
+        android:id="@+id/btnchat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custombutton1round"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:tint="@color/mybuttonpink"
+        app:layout_constraintEnd_toStartOf="@+id/btnlogout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_action_email" />
 
     <Button
         android:id="@+id/btnEmailDentist"
@@ -48,9 +64,125 @@
         android:text="Email Dentist"
         android:textColor="#FF0095"
         app:backgroundTint="#00F9C2E2"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="#FFFFFF" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/mybuttonpinkdark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:text="My Dental App"
+        android:textSize="50sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/bannerdescript"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:text="Your Dental Health Journey"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-black"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/usernamelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        android:text="Username:"
+        app:layout_constraintTop_toBottomOf="@id/bannerdescript"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/usernametv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        app:layout_constraintTop_toBottomOf="@id/bannerdescript"
+        app:layout_constraintLeft_toRightOf="@id/usernamelabel"/>
+
+    <TextView
+        android:id="@+id/emaillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        android:text="Email:"
+        app:layout_constraintTop_toBottomOf="@id/usernamelabel"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/emailtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        app:layout_constraintTop_toBottomOf="@id/usernamelabel"
+        app:layout_constraintLeft_toRightOf="@id/emaillabel"/>
+
+    <TextView
+        android:id="@+id/st_weeklabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        android:text="Starting week:"
+        app:layout_constraintTop_toBottomOf="@id/emaillabel"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/st_weektv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="6dp"
+        android:ems="10"
+        app:layout_constraintTop_toBottomOf="@id/emaillabel"
+        app:layout_constraintLeft_toRightOf="@id/st_weeklabel"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

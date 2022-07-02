@@ -19,7 +19,7 @@ public class MyDBHelp extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(username TEXT primary key, password TEXT)");
+        MyDB.execSQL("create Table users(u mail )");
     }
 
     @Override

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "233987571569",
+    "project_id": "dentalhealthapp",
+    "storage_bucket": "dentalhealthapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233987571569:android:2537a3f4f64434518700d0",
+        "android_client_info": {
+          "package_name": "com.example.mydentalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233987571569-0qf074bkqs7g4t2g6fdqr06cjf047nbh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4Hng_ATGpPz7vuu15RrDRAOu1UB5bYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233987571569-0qf074bkqs7g4t2g6fdqr06cjf047nbh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
