@@ -4,7 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg1"
     tools:context=".MyLoginActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logotemp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@id/banner1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/banner1"
@@ -72,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Login"
-        app:backgroundTint="#F9C2E2"
+        app:backgroundTint="@color/mybuttonpinkdark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password1" />
@@ -83,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Reset password"
-        android:textColor="#FF0095"
+        android:textColor="@color/mybuttonpinkdark"
         app:backgroundTint="#00F9C2E2"
         style="?android:attr/borderlessButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Create new account"
-        android:textColor="#FF0095"
+        android:textColor="@color/mybuttonpinkdark"
         app:backgroundTint="#00F9C2E2"
         style="?android:attr/borderlessButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +118,7 @@
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/mybuttonpinkdark"
+        android:indeterminateTint="@color/mybuttonpink"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

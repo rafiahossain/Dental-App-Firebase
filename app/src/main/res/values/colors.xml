@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mybuttonpink">#F9C2E2</color>
     <color name="mybuttonpinkdark">#7A0147</color>
+    <color name="mybg1">#F8DAEB</color>
 
 </resources>

@@ -22,17 +22,17 @@ public class UserClass {
 
     }
 
-    public String getUserEmail(){
-        return emailadd;
-    }
-
-    public String getUserName(){
-        return username;
-    }
-
-    public int getStartWeek(){
-        return startweek;
-    }
+//    public String getUserEmail(){
+//        return emailadd;
+//    }
+//
+//    public String getUserName(){
+//        return username;
+//    }
+//
+//    public int getStartWeek(){
+//        return startweek;
+//    }
 
 
 

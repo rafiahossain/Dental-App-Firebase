@@ -112,13 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 UserClass userProfile = snapshot.getValue(UserClass.class);
 
                 if(userProfile != null){
-//                    emailtextview.setText(userProfile.emailadd);
-//                    usernametextview.setText(userProfile.username);
-//                    stweektextview.setText(userProfile.startweek);
+                    emailtextview.setText(userProfile.emailadd);
+                    usernametextview.setText(userProfile.username);
+                    stweektextview.setText(userProfile.startweek);
 
-                    emailtextview.setText(userProfile.getUserEmail());
-                    usernametextview.setText(userProfile.getUserName());
-                    stweektextview.setText(userProfile.getStartWeek());
+//                    emailtextview.setText(userProfile.getUserEmail());
+//                    usernametextview.setText(userProfile.getUserName());
+//                    stweektextview.setText(userProfile.getStartWeek());
                 }
 
             }
