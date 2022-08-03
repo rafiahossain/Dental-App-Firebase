@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private Button emDentist;
     //private ProgressBar progressBar;
 
+    FirebaseAuth mAuth;
+
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         chat = (ImageButton)findViewById(R.id.btnchat);
         emDentist = (Button)findViewById(R.id.btnEmailDentist);
         //progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        mAuth = FirebaseAuth.getInstance();
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +73,17 @@ public class MainActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent j = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(j);
+//                String xEmail = mAuth.getCurrentUser().getEmail();
+//                //does not work because it cant find current user?
+//                if(xEmail == "qstodentist@gmail.com"){
+//                    Intent i = new Intent(getApplicationContext(), ChatListActivity.class);
+//                    startActivity(i);
+//                }else{
+//                    Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+//                    startActivity(i);
+//                }
             }
         });
 
@@ -84,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
         //.child(userID);
 
         //final type because we will access them in inner classes
@@ -92,20 +105,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView emailtextview = (TextView)findViewById(R.id.emailtv);
         final TextView stweektextview = (TextView)findViewById(R.id.st_weektv);
 
-        //Works here:
-        //usernametextview.setText("My username");
-        //So why doesnt it read from database
-
-//        emailtextview.setText("My email");
-//        usernametextview.setText("my username");
-//        stweektextview.setText("my start");
-
         //get data from real time database
 
-        //instead of reference use:
-        //FirebaseDatabase.getInstance("https://dentalhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Users")
-        //                                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-        //but it crashes at login why?
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -115,11 +116,24 @@ public class MainActivity extends AppCompatActivity {
                     emailtextview.setText(userProfile.emailadd);
                     usernametextview.setText(userProfile.username);
                     stweektextview.setText(userProfile.startweek);
-
-//                    emailtextview.setText(userProfile.getUserEmail());
-//                    usernametextview.setText(userProfile.getUserName());
-//                    stweektextview.setText(userProfile.getStartWeek());
                 }
+//                if(snapshot.exists()){
+//                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                        if(dataSnapshot.child("emailadd").getValue().toString().equals(mAuth.getCurrentUser().getEmail())){
+//                            emailtextview.setText(mAuth.getCurrentUser().getEmail());
+//                        }
+//                    }
+//                }
+
+//                if(snapshot.exists()){
+//                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                        if(dataSnapshot.child("emailadd").getValue().toString().equals(mAuth.getCurrentUser().getEmail())){
+//
+//                        }
+//                    }
+//                }
+
+
 
             }
 

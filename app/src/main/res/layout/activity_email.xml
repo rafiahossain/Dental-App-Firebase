@@ -10,12 +10,14 @@
     android:gravity="center"
     tools:context=".MyEmailActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/closeMail"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="#F9C2E2"
-        android:clickable="true"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:tint="@color/mybuttonpink"
+        android:background="@drawable/custombutton1round"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
     <EditText
@@ -51,6 +53,7 @@
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custombutton1round"
         android:layout_marginTop="16dp"
         android:text="Send"
         app:backgroundTint="#F9C2E2" />

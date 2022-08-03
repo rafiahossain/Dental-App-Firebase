@@ -9,6 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mybuttonpink">#F9C2E2</color>
     <color name="mybuttonpinkdark">#7A0147</color>
+    <color name="mybuttonpinkmedium">#C10270</color>
     <color name="mybg1">#F8DAEB</color>
+    <color name="mygrey">#C0C0C0</color>
+    <color name="mydarkgrey">#696969</color>
+    <color name="myclear">#0000ffff</color>
+
 
 </resources>

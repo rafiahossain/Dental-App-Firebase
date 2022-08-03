@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDentalApp">
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".UserProfile"/>
+        <activity android:name=".ChatListActivity" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".ForgotPassword" />
         <activity android:name=".MyRegisterPage" />
         <activity android:name=".MyLoginActivity">
             <intent-filter>
@@ -22,10 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" />
+        <activity android:name=".MainActivity"/>
         <activity android:name=".MyEmailActivity" />
+
+        <service
+            android:name=".MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class MyEmailActivity extends AppCompatActivity {
     //Initialise Variables
     EditText etTo, etSubject, etMessage;
     Button btnSendMessage;
+    ImageButton closeMail;
     String sEmail, sPassword;
 
     @Override
@@ -43,10 +46,19 @@ public class MyEmailActivity extends AppCompatActivity {
         etSubject = findViewById(R.id.et_subject);
         etMessage = findViewById(R.id.et_message);
         btnSendMessage = findViewById(R.id.btnSend);
+        closeMail = findViewById(R.id.closeMail);
 
         //Sender Credentials
         sEmail = "QsToDentist@gmail.com";
         sPassword = "dentist190422!";
+
+        closeMail.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnSendMessage.setOnClickListener(new View.OnClickListener(){
 
