@@ -38,8 +38,6 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        //Hooking variables to xml file
-
         //Textview
         fullnameLabel = findViewById(R.id.fullname_field);
         emailLabel = findViewById(R.id.email_field);
@@ -54,22 +52,28 @@ public class UserProfile extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
-        //.child(userID);
 
         //get data from real time database
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserClass userProfile = snapshot.getValue(UserClass.class);
 
                 if (userProfile != null) {
-//                    fullnameLabel.setText(userProfile.name);
-//                    emailLabel.setText(userProfile.emailadd);
-//                    usernameLabel.setText(userProfile.username);
 
-                    fullname.getEditText().setText(userProfile.name);
-                    startDate.getEditText().setText(userProfile.startDate);
-                    password.getEditText().setText(userProfile.password);
+                    String name = userProfile.name;
+                    String em = userProfile.emailadd;
+                    String un = userProfile.username;
+                    String pw = userProfile.password;
+                    String sd = userProfile.startDate;
+
+//                    fullnameLabel.setText(name);
+//                    emailLabel.setText(em);
+//                    usernameLabel.setText(un);
+
+                    fullname.getEditText().setText(name);
+                    startDate.getEditText().setText(sd);
+                    password.getEditText().setText(pw);
                 }
             }
 
