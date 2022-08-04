@@ -38,9 +38,9 @@ public class MyLoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_my_login);
 
-        edittextemail = (EditText)findViewById(R.id.email1);
-        edittextpassword = (EditText)findViewById(R.id.password1);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        edittextemail = (EditText) findViewById(R.id.email1);
+        edittextpassword = (EditText) findViewById(R.id.password1);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -54,18 +54,17 @@ public class MyLoginActivity extends AppCompatActivity {
         String password = edittextpassword.getText().toString().trim();
 
         //check if any field empty
-        if(email.equals("")||password.equals("")){
+        if (email.equals("") || password.equals("")) {
             Toast.makeText(MyLoginActivity.this, "Please enter values for all fields", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        } else {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 edittextemail.setError("Please provide valid email address");
                 edittextemail.requestFocus();
                 return;
             }
 
             // Check if password is at least 6 characters long
-            if(password.length() < 6){
+            if (password.length() < 6) {
                 edittextpassword.setError("Password should be minimum 6 characters");
                 edittextpassword.requestFocus();
                 return;
@@ -73,13 +72,13 @@ public class MyLoginActivity extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
 
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         //check if user has confirmed email verification
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        if(user.isEmailVerified()) {
+                        if (user.isEmailVerified()) {
                             //redirect to home page/main activity
                             //Passing user information
 //                            String uid = user.getUid();
@@ -94,7 +93,7 @@ public class MyLoginActivity extends AppCompatActivity {
 //                                        String startDateFromDB = snapshot.child(user.getUid()).child("startDate").getValue(String.class);
 //                                        String passwordFromDB = snapshot.child(user.getUid()).child("password").getValue(String.class);
 //
-                                        Intent i = new Intent(getApplicationContext(), UserProfile.class);
+                            Intent i = new Intent(getApplicationContext(), UserProfile.class);
 //
 //                                        i.putExtra("name", nameFromDB);
 //                                        i.putExtra("username", usernameFromDB);
@@ -102,9 +101,9 @@ public class MyLoginActivity extends AppCompatActivity {
 //                                        i.putExtra("startDate", startDateFromDB);
 //                                        i.putExtra("password", passwordFromDB);
 //
-                                        startActivity(i);
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(MyLoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            startActivity(i);
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(MyLoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 //                                    }
 //                                }
 //
@@ -113,14 +112,14 @@ public class MyLoginActivity extends AppCompatActivity {
 //
 //                                }
 //                            });
-                        }else{
+                        } else {
                             user.sendEmailVerification();
                             Toast.makeText(MyLoginActivity.this, "Please check email to verify account, check spam folder as well", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                             Intent i = new Intent(getApplicationContext(), MyLoginActivity.class);
                             startActivity(i);
                         }
-                    }else{
+                    } else {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(MyLoginActivity.this, "Invalid Credentials", Toast.LENGTH_LONG).show();
                     }
@@ -128,7 +127,6 @@ public class MyLoginActivity extends AppCompatActivity {
             });
         }
     }
-
 
     public void toregister(View view) {
         Intent i = new Intent(getApplicationContext(), MyRegisterPage.class);
