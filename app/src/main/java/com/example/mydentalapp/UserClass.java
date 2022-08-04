@@ -4,21 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UserClass {
 
-    //This class is to send user data to firebase
-    //Create string and integer variables
-
-    public String emailadd, username, startweek;
+    public String name, emailadd, username, startDate, password;
 
     public UserClass(){
         //Empty public constructor, Does not return anything
-        //To create an empty object of this class, To access the variables
+        //To create an empty object of this class
     }
 
-    public UserClass(String emailadd, String username, String startweek){
+    public UserClass(String name, String emailadd, String username, String startDate, String password){
+        this.name = name;
         this.emailadd = emailadd;
         this.username = username;
-        this.startweek = startweek;
-
+        this.startDate = startDate;
+        this.password = password;
     }
 
 

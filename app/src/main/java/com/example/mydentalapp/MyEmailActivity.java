@@ -55,7 +55,7 @@ public class MyEmailActivity extends AppCompatActivity {
         closeMail.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), UserProfile.class);
                 startActivity(i);
             }
         });

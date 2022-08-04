@@ -18,6 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MyLoginActivity extends AppCompatActivity {
 
@@ -75,10 +81,38 @@ public class MyLoginActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if(user.isEmailVerified()) {
                             //redirect to home page/main activity
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MyLoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), UserProfile.class);
-                            startActivity(i);
+                            //Passing user information
+//                            String uid = user.getUid();
+//                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+//                            reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                    if(snapshot.exists()){
+//                                        String nameFromDB = snapshot.child(user.getUid()).child("name").getValue(String.class);
+//                                        String usernameFromDB = snapshot.child(user.getUid()).child("username").getValue(String.class);
+//                                        String emailFromDB = snapshot.child(user.getUid()).child("emailadd").getValue(String.class);
+//                                        String startDateFromDB = snapshot.child(user.getUid()).child("startDate").getValue(String.class);
+//                                        String passwordFromDB = snapshot.child(user.getUid()).child("password").getValue(String.class);
+//
+                                        Intent i = new Intent(getApplicationContext(), UserProfile.class);
+//
+//                                        i.putExtra("name", nameFromDB);
+//                                        i.putExtra("username", usernameFromDB);
+//                                        i.putExtra("emailadd", emailFromDB);
+//                                        i.putExtra("startDate", startDateFromDB);
+//                                        i.putExtra("password", passwordFromDB);
+//
+                                        startActivity(i);
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(MyLoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                }
+//                            });
                         }else{
                             user.sendEmailVerification();
                             Toast.makeText(MyLoginActivity.this, "Please check email to verify account, check spam folder as well", Toast.LENGTH_LONG).show();
@@ -94,6 +128,7 @@ public class MyLoginActivity extends AppCompatActivity {
             });
         }
     }
+
 
     public void toregister(View view) {
         Intent i = new Intent(getApplicationContext(), MyRegisterPage.class);

@@ -48,6 +48,15 @@
                 android:textStyle="italic"/>
 
             <EditText
+                android:id="@+id/fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="Full name"
+                android:inputType="textPersonName"/>
+
+            <EditText
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

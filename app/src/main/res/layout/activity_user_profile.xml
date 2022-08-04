@@ -41,18 +41,18 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/profile_image"
                 android:fontFamily="@font/archivo_black"
-                android:text="Rafia"
+                android:text="Fullname placement"
                 android:includeFontPadding="false"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/username_field"
+                android:id="@+id/email_field"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fullname_field"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/profile_image"
-                android:text="r.rafia"
+                android:text="username placement"
                 android:includeFontPadding="false"
                 android:textSize="14sp" />
 
@@ -177,11 +177,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_profile"
+                android:id="@+id/username_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="Email">
+                android:hint="Username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
