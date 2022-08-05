@@ -54,7 +54,7 @@ public class UserProfile extends AppCompatActivity {
         fullnameLabel.setText(userID);
 
         //get data from real time database
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
