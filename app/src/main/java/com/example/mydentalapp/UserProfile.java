@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class UserProfile extends AppCompatActivity {
@@ -23,14 +25,6 @@ public class UserProfile extends AppCompatActivity {
     //Variables
     TextInputLayout fullname, startDate, password;
     TextView fullnameLabel, emailLabel, usernameLabel;
-
-    //Global variables for getting string values through intent
-    String _NAME, _EMAIL, _USERNAME, _STARTDATE, _PASSWORD;
-
-    FirebaseAuth mAuth;
-    private FirebaseUser user;
-    private DatabaseReference reference;
-    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,26 +41,30 @@ public class UserProfile extends AppCompatActivity {
         startDate = findViewById(R.id.start_date_profile);
         password = findViewById(R.id.password_profile);
 
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        userID = user.getUid();
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userID = user.getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Users");
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Log.d("USERLOGIN", "USER IS NOT LOGGED IN");
+        }
+
+        fullnameLabel.setText(userID);
 
         //get data from real time database
-        reference.child(userID).addValueEventListener(new ValueEventListener() {
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserClass userProfile = snapshot.getValue(UserClass.class);
+                if(snapshot.exists()){
+                    String name = snapshot.child(userID).child("name").getValue(String.class);
+                    String un = snapshot.child(userID).child("username").getValue(String.class);
+                    String em = snapshot.child(userID).child("emailadd").getValue(String.class);
+                    String pw = snapshot.child(userID).child("startDate").getValue(String.class);
+                    String sd = snapshot.child(userID).child("password").getValue(String.class);
 
-                if (userProfile != null) {
-
-                    String name = userProfile.name;
-                    String em = userProfile.emailadd;
-                    String un = userProfile.username;
-                    String pw = userProfile.password;
-                    String sd = userProfile.startDate;
-
-                    fullnameLabel.setText(name);
+                    //fullnameLabel.setText(name);
                     emailLabel.setText(em);
                     usernameLabel.setText(un);
 
@@ -74,6 +72,25 @@ public class UserProfile extends AppCompatActivity {
                     startDate.getEditText().setText(sd);
                     password.getEditText().setText(pw);
                 }
+
+//                UserClass userProfile = snapshot.getValue(UserClass.class);
+//
+//                if (userProfile != null) {
+//
+//                    String name = userProfile.name;
+//                    String em = userProfile.emailadd;
+//                    String un = userProfile.username;
+//                    String pw = userProfile.password;
+//                    String sd = userProfile.startDate;
+//
+//
+//                    emailLabel.setText(em);
+//                    usernameLabel.setText(un);
+//
+//                    fullname.getEditText().setText(name);
+//                    startDate.getEditText().setText(sd);
+//                    password.getEditText().setText(pw);
+//                }
             }
 
             @Override
