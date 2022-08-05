@@ -27,7 +27,7 @@
                 android:src="@android:drawable/ic_lock_power_off" />
 
             <ImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/logo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerVertical="true"
@@ -39,9 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/profile_image"
+                android:layout_toRightOf="@+id/logo"
                 android:fontFamily="@font/archivo_black"
-                android:text="Fullname placement"
                 android:includeFontPadding="false"
                 android:textSize="20sp" />
 
@@ -51,8 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fullname_field"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/profile_image"
-                android:text="email placement"
+                android:layout_toRightOf="@+id/logo"
                 android:includeFontPadding="false"
                 android:textSize="14sp" />
 
@@ -62,8 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/email_field"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/profile_image"
-                android:text="username placement"
+                android:layout_toRightOf="@+id/logo"
                 android:includeFontPadding="false"
                 android:textSize="14sp" />
 

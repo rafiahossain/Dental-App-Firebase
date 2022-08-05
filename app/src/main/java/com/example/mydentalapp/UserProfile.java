@@ -28,7 +28,6 @@ public class UserProfile extends AppCompatActivity {
     String _NAME, _EMAIL, _USERNAME, _STARTDATE, _PASSWORD;
 
     FirebaseAuth mAuth;
-
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -49,7 +48,7 @@ public class UserProfile extends AppCompatActivity {
         password = findViewById(R.id.password_profile);
 
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = mAuth.getCurrentUser();
         userID = user.getUid();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -67,9 +66,9 @@ public class UserProfile extends AppCompatActivity {
                     String pw = userProfile.password;
                     String sd = userProfile.startDate;
 
-//                    fullnameLabel.setText(name);
-//                    emailLabel.setText(em);
-//                    usernameLabel.setText(un);
+                    fullnameLabel.setText(name);
+                    emailLabel.setText(em);
+                    usernameLabel.setText(un);
 
                     fullname.getEditText().setText(name);
                     startDate.getEditText().setText(sd);
